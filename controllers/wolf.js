@@ -39,3 +39,24 @@ exports.wolf_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+    // Handle wolf create on POST.
+exports.wolf_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new wolf();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    // {"wolf_type":"goat", "cost":12, "size":"large"}
+    document.wolf_color = req.body.wolf_color;
+    document.wolf_breed = req.body.wolf_breed;
+    document.wolf_price = req.body.wolf_price;
+    try{
+    let result = await document.save();
+    res.send(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+    
