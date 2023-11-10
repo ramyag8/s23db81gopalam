@@ -1,8 +1,16 @@
 var wolf = require('../models/wolf');
 // List of all wolfs
-exports.wolf_list = function(req, res) {
-res.send('NOT IMPLEMENTED: wolf list');
-};
+exports.wolf_list = async function(req, res) {
+    try{
+    thewolfs = await wolf.find();
+    res.send(thewolfs);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
+    
 // for a specific wolf.
 exports.wolf_detail = function(req, res) {
 res.send('NOT IMPLEMENTED: wolf detail: ' + req.params.id);
@@ -19,3 +27,15 @@ res.send('NOT IMPLEMENTED: wolf delete DELETE ' + req.params.id);
 exports.wolf_update_put = function(req, res) {
 res.send('NOT IMPLEMENTED: wolf update PUT' + req.params.id);
 };
+// VIEWS
+// Handle a show all view
+exports.wolf_view_all_Page = async function(req, res) {
+    try{
+    thewolfs = await wolf.find();
+    res.render('wolf', { title: 'wolf Search Results', results: thewolfs });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };
