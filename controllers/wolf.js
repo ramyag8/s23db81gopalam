@@ -89,4 +89,62 @@ res.send(`{"error": ${err}: Update for id ${req.params.id}
 failed`);
 }
 };
+exports.wolf_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await wolf.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    }
+        exports.wolf_view_one_Page = async function(req, res) {
+            console.log("single view for id " + req.query.id)
+            try{
+            result = await wolf.findById( req.query.id)
+            res.render('wolfdetail',
+            { title: 'wolf Detail', toShow: result });
+            }
+            catch(err){
+            res.status(500)
+            res.send(`{'error': '${err}'}`);
+            }
+            };
+            exports.wolf_create_Page = function(req, res) {
+                console.log("create view")
+                try{
+                res.render('wolfcreate', { title: 'wolf Create'});
+                }
+                catch(err){
+                res.status(500)
+                res.send(`{'error': '${err}'}`);
+                }
+                };
+                exports.wolf_update_Page = async function(req, res) {
+                    console.log("update view for item "+req.query.id)
+                    try{
+                    let result = await wolf.findById(req.query.id)
+                    res.render('wolfupdate', { title: 'wolf Update', toShow: result });
+                    }
+                    catch(err){
+                    res.status(500)
+                    res.send(`{'error': '${err}'}`);
+                    }
+                   };
+                   exports.wolf_delete_Page = async function(req, res) {
+                    console.log("Delete view for id " + req.query.id)
+                    try{
+                    result = await wolf.findById(req.query.id)
+                    res.render('wolfdelete', { title: 'wolf Delete', toShow:
+                    result });
+                    }
+                    catch(err){
+                    res.status(500)
+                    res.send(`{'error': '${err}'}`);
+                    }
+                    };
+    
+
     

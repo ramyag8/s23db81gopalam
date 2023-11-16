@@ -1,0 +1,23 @@
+extends layout
+block content
+ h1= title
+ if(toShow == null)
+    h2 No instance to update
+ else
+ - let wolfid = toShow._id
+ - let wolf_color = toShow.wolf_color
+ - let wolf_breed = toShow.wolf_breed
+ - let wolf_price = toShow.wolf_price
+ div
+ div.row
+  div(class='wolfAttr mr-3') wolf ID is:
+  div #{wolfid}
+ div.row
+ div(class='wolfAttr mr-3') wolf Color is:
+ div #{wolf_color}
+ div.row
+ div(class='wolfAttr mr-3') wolf Breed is:
+ div #{wolf_breed}
+ div.row
+ div(class='wolfAttr mr-3') wolf Cost is:
+ div #{wolf_price}
