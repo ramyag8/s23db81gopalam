@@ -1,26 +1,31 @@
 extends layout
+
 block content
-    div(class="container-fluid")
-        h1= title
-    - let items = results;
-    - let o;
-        div(class="row")
-            each form, item in results
-                div(class="col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_color}
-                div(class="col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_breed}
-                div(class="col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_price}
-                hr
-    script.
-        function buy(itemNo)
-        {
-            alert(`You purchased Item ${itemNo+1}`)
-        }
-        function dispatch(path){
-            window.location.href=path
-        }
-    div(class="container-fluid")
-        div(class="row m-1")
-            each item in items
-                - let destination = `dispatch("/wolf/update?id=${item._id}")`
-                div(class="row-sm-2 m-1") Item #{item.wolf_color}(#{item.wolf_breed}) is #{item.wolf_price}
-                button.btn(class="btn-primary ml-1", onclick=destination) Update
+  h1= title
+  //- - let items = ['wolf_type','quantity','cost']
+  - let items = results;
+  - let o;
+  script.
+    function buy(x){
+      alert('purchased item ' + x)
+   } 
+  div(class='container-fluid')
+    a(class="btn btn-primary" href="/wolf/create") Create
+    div(class='row m-1')
+    div(class="row row-cols-1 row-cols-sm-4 g-6")
+      each item,index in items
+        - let destination = `dispatch(\"/wolf/update?id=${item._id}\")`
+        - let details = `dispatch(\"/wolf/detail?id=${item._id}\")` 
+      
+        div(class="wolfd text-white bg-dark mb-3" class='col' class='wolfd' class='wolfd-body' class='wolfd-text' onclick='buy('+index+')') Item #{item.wolf_color}(#{item.wolf_breed})is #{item.wolf_price} 
+          <br><br>
+          span(class="btn btn-primary", onclick= details) Details
+          <br>
+          a(class="btn btn-secondary", href="/wolf/delete/?id="+item._id) Delete
+          <br>
+          button.btn( class="btn-success ml-1", onclick= destination) Update
+
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
