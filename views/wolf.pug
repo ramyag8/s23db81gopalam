@@ -5,24 +5,22 @@ block content
     - let items = results;
     - let o;
         div(class="row")
-            each form,item in results
-                div(class = "col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_color}
-                div(class = "col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_breed}
-                div(class = "col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_price}
+            each form, item in results
+                div(class="col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_color}
+                div(class="col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_breed}
+                div(class="col-sm-2 bg-success" onclick=`buy(${item})`) #{form.wolf_price}
                 hr
     script.
         function buy(itemNo)
         {
             alert(`You purchased Item ${itemNo+1}`)
         }
- div(class="container-fluid")
- div(class="row m-1")
- each item in items
- - let destination = `dispatch(\"/wolf/update?id=${item._id}\")`
- div(class="row-sm-2", class="m-1") Item #{item.wolf_color}(#{item.wolf_breed}) is #{item.wolf_price}
- button.btn( class="btn-primary ml-1", onclick= destination) Update
-
- script.
- function dispatch(path){
- window.location.href=path
- }
+        function dispatch(path){
+            window.location.href=path
+        }
+    div(class="container-fluid")
+        div(class="row m-1")
+            each item in items
+                - let destination = `dispatch("/wolf/update?id=${item._id}")`
+                div(class="row-sm-2 m-1") Item #{item.wolf_color}(#{item.wolf_breed}) is #{item.wolf_price}
+                button.btn(class="btn-primary ml-1", onclick=destination) Update
