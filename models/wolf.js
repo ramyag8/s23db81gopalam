@@ -1,12 +1,7 @@
 const mongoose = require("mongoose")
 const wolfSchema = mongoose.Schema({
 wolf_color: String,
-wolf_breed: String,
-wolf_price: {type :Number,
-    min:5,
-    max:5000
-
-}
-
-});
+wolf_breed: {type:String,length:15},
+wolf_price: {type:Number,min:1000,max:100000}
+})
 module.exports = mongoose.model("wolf",wolfSchema)

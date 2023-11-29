@@ -21,7 +21,7 @@ res.redirect("/login");
 /* GET wolfs */
 router.get('/', wolf_controllers.wolf_view_all_Page );
 router.get('/detail', wolf_controllers.wolf_view_one_Page);
-router.get('/create', wolf_controllers.wolf_create_Page);
+router.get('/create',secured, wolf_controllers.wolf_create_Page);
 router.get('/update',secured, wolf_controllers.wolf_update_Page);
-router.get('/delete', wolf_controllers.wolf_delete_Page);
+router.get('/delete',secured,wolf_controllers.wolf_delete_Page);
 module.exports = router;
